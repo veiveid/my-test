@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+/*.iml
+/.idea/
+/target/
+/src/test/*
+/src/main/resources/common.properties
+/src/main/resources/spring/spring-consumer.xml
+/src/main/resources/spring/jmq2es/jmq2es-consumer.xml
+/my-test-process.iml

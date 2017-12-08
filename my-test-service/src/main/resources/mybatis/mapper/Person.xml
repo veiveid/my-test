@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Person">
+
+    <resultMap id="personResultMap" type="com.my.test.service.person.model.Person">
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="address" column="address"/>
+    </resultMap>
+
+   <insert id="addPerson" parameterType="com.my.test.service.person.model.Person">
+       INSERT INTO person(
+          name,age,address
+       ) VALUES (
+          #{name},#{age},#{address}
+       )
+   </insert>
+
+    <update id="updatePersonByid" parameterType="com.my.test.service.person.model.Person">
+        UPDATE person
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="age!=null and age!=''">
+                age=#{age},
+            </if>
+            <if test="address!=null and address!=''">
+                address=#{address}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    
+    <select id="findAllPerson" resultMap="personResultMap">
+        SELECT
+        id,name,age,address
+        FROM
+        person
+    </select>
+
+</mapper>

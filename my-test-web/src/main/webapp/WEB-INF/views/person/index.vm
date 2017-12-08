@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-store, must-revalidate"> 
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT"> 
+<META HTTP-EQUIV="expires" CONTENT="0">
+<title>测试系统</title>
+<script src="/static/js/auto_compelete/jquery.min.js"></script>
+
+</head>
+<body>
+	<h3>你最喜欢的人是？</h3>
+	<input type="text" id="pName" value=""/>
+	<input type="button" value="提交" onclick="whoYouLike();"/>
+    <div id="res"></div>
+    <canvas id="c" height="500" width="500"></canvas>
+</body>
+<script>
+    function whoYouLike() {
+        $("#res").text("");
+        var pName = $("#pName").val();
+        if(pName==undefined || pName==""){
+            alert("请输入名字")
+            return;
+        }
+        pName = encodeURI(encodeURI(pName));
+        jQuery.ajax({
+            type:"GET",
+            dataType: "json",
+            url:"/person/whoYouLike",
+            data:"pName="+pName,
+            success:function(res){
+                //alert(res.res);
+                if(res.res == "01"){
+                    $("#res").text("恭喜你回答正确！").css("color","green");
+                    window.location.href="/person/showFlower";
+                }else{
+                    $("#res").text("艾玛，回答错误，重试一次").css("color","red");
+                }
+
+            }
+        });
+    }
+</script>
+</html>

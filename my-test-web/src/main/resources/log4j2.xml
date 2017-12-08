@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<!--<Property name="LOG.PATH">${sys:log.path.prefix}</Property>-->
+		<Property name="LOG.PATH">D:\logs</Property>
+		<Property name="LOG.PATTERN">[%p][%d{yyyy-MM-dd HH:mm:ss.SSS}][%t][%c]%m%n</Property>
+	</Properties>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOG.PATTERN}" />
+		</Console>
+
+		<!-- info -->
+		<RollingRandomAccessFile  name="my-test-web-info" fileName="${LOG.PATH}/my-test-web-info.log"
+								  filePattern="${LOG.PATH}/my-test-web-info-%d{yyyy-MM-dd}-%i.log"
+								  immediateFlush="true">
+			<Filters>
+				<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+			<PatternLayout pattern="${LOG.PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="72" />
+		</RollingRandomAccessFile >
+
+
+		<!-- debug -->
+		<RollingRandomAccessFile  name="my-test-web-error" fileName="${LOG.PATH}/my-test-web-error.log"
+								  filePattern="${LOG.PATH}/my-test-web-error-%d{yyyy-MM-dd}-%i.log"
+								  immediateFlush="true">
+			<Filters>
+				<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+			<PatternLayout pattern="${LOG.PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="72" />
+		</RollingRandomAccessFile >
+
+		<!-- error -->
+		<RollingRandomAccessFile  name="my-test-web-error" fileName="${LOG.PATH}/my-test-web-error.log"
+								  filePattern="${LOG.PATH}/my-test-web-error-%d{yyyy-MM-dd}-%i.log"
+								  immediateFlush="true">
+			<Filters>
+				<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+			<PatternLayout pattern="${LOG.PATTERN}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="72" />
+		</RollingRandomAccessFile >
+	</Appenders>
+</Configuration>
