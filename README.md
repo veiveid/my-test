@@ -1,3 +1,3 @@
 my-test
 ====
-慧眼异常管理平台前端
+spring+springmvc+mybatis
