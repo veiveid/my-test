@@ -70,7 +70,7 @@ public class PersonCtl {
         try {
             String pName = request.getParameter("pName");
             pName = java.net.URLDecoder.decode(pName,"UTF-8");
-            if("胖狗子".equals(pName) || "张伟".equals(pName)||"陈晶晶".equals(pName)|| "小可爱".equals(pName)){
+            if("胖狗子".equals(pName) || "伟".equals(pName)||"晶".equals(pName)|| "可爱".equals(pName)){
                 res.put("res","01");
                 return res;
             }
