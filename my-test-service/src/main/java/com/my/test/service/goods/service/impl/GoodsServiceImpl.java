@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -65,5 +66,10 @@ public class GoodsServiceImpl implements GoodsService {
                 countDownLatch.countDown();
             }
         }
+    }
+
+    @Override
+    public List<Goods> findAll() {
+        return goodsDao.findAll();
     }
 }
