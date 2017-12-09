@@ -6,4 +6,6 @@
 /src/main/resources/common.properties
 /src/main/resources/spring/spring-consumer.xml
 /src/main/resources/spring/jmq2es/jmq2es-consumer.xml
-/my-test-process.iml
+my-test-test.iml
+my-test-service.iml
+my-test-web.iml
