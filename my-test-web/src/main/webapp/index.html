@@ -46,7 +46,7 @@
 					type:"GET",
 					dataType: "json",
 					async: false,
-					url:"/demoCtl/getData",
+					url:"/my-test-web/demoCtl/getData",
 					success:function(data){
 						availableTags = data;
 					}
@@ -75,7 +75,7 @@
 			jQuery.ajax({
 				type:"GET",
 				dataType: "json",
-				url:"/person/whoYouLike",
+				url:"/my-test-web/person/whoYouLike",
 				data:"pName="+pName,
 				success:function(res){
 					alert(res.res);
@@ -100,7 +100,8 @@
 	<h3>你最喜欢的人是？</h3>
 	<input type="text" id="pName" value=""/>
 	<input type="button" value="提交" onclick="whoYouLike();"/>
-	<div id="res"></div>
+	<div id="res"></div><br>
+	<img src="static/img/tomcat.png">
 </div>
 </body>
 </html>
