@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+
+    <script src="../../js/auto_compelete/jquery.min.js"></script>
+
+    <script>
+        $(function() {
+            function getData(){
+                $.ajax({
+                    type:"GET",
+                    dataType: "json",
+                    async: true,
+                    url:"/my-test-web/person/allPerson",
+                    success:function(data){
+                        if (data != undefined){
+                            var html = "";
+                            for (d in data){
+                                var p = data[d];
+                                html+="<tr><td>"+p.id+"</td><td>"+p.name+"</td><td>"
+                                        +p.age+"</td><td>"+p.address+"</td><td><a href='person-detail.html?id="+p.id+"'>详情</a></td></tr>";
+                            }
+                            $("#listCon").append(html);
+                        }
+                    }
+                });
+            }
+            getData();
+        });
+
+
+    </script>
+</head>
+<body>
+<h4>人员列表</h4>
+<table border="1" cellspacing="0" bordercolor="#000000" width="50%">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>住址</th>
+            <th>详情</th>
+        </tr>
+    </thead>
+    <tbody id="listCon"></tbody>
+</table>
+</body>
+</html>

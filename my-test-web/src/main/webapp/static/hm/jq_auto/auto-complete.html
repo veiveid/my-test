@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+    <link rel="stylesheet" href="../../css/auto_compelete/jquery-ui.css">
+    <script src="../../js/auto_compelete/jquery.min.js"></script>
+    <script src="../../js/auto_compelete/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            /**
+             var availableTags = [
+             "ActionScript",
+             "AppleScript",
+             "Asp",
+             "BASIC",
+             "C",
+             "C++",
+             "Clojure",
+             "COBOL",
+             "ColdFusion",
+             "Erlang",
+             "Fortran",
+             "Groovy",
+             "Haskell",
+             "Java",
+             "JavaScript",
+             "Lisp",
+             "Perl",
+             "PHP",
+             "Python",
+             "Ruby",
+             "Scala",
+             "Scheme",
+             "中华人民共和国"
+             ];
+             var availableTags = [
+             "中国|001",
+             "美国|name"
+             ];*/
+
+            var availableTags = [];
+
+            function getData(){
+                $.ajax({
+                    type:"GET",
+                    dataType: "json",
+                    async: false,
+                    url:"/my-test-web/demoCtl/getData",
+                    success:function(data){
+                        availableTags = data;
+                    }
+                });
+            }
+            $("#cityId").change(function(){
+                getData();//加载数据
+                $( "#tags" ).autocomplete({
+                    source: availableTags,
+                    select: function(event, ui) {
+                        var item = ui.item;
+                        var code = item.value.split("|")[1];
+                        $("#tagCodeHid").val(code);
+                    }
+                });
+            });
+        });
+
+        function whoYouLike() {
+            var pName = $("#pName").val();
+            if(pName==undefined || pName==""){
+                alert("请输入名字")
+                return;
+            }
+            pName = encodeURI(encodeURI(pName));
+            jQuery.ajax({
+                type:"GET",
+                dataType: "json",
+                url:"/my-test-web/person/whoYouLike",
+                data:"pName="+pName,
+                success:function(res){
+                    alert(res.res);
+                    $("#res").text(12231);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>465676889</h1>
+<div class="ui-widget">
+    <select id="cityId">
+        <option value="-1">请选择</option>
+        <option value="1">济南</option>
+        <option value="2">北京</option>
+    </select>
+    <label for="tags">Tags: </label>
+    <input id="tags">
+    <input id="tagCodeHid" value=""/>
+
+    <h3>who？</h3>
+    <input type="text" id="pName" value=""/>
+    <input type="button" value="提交" onclick="whoYouLike();"/>
+    <div id="res"></div><br>
+
+</div>
+</body>
+</html>

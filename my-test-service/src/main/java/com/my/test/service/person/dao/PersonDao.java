@@ -14,4 +14,6 @@ public interface PersonDao {
     void updatePersonByid(Person person);
 
     List<Person> findAllPerson();
+
+    Person personDetail(String id);
 }

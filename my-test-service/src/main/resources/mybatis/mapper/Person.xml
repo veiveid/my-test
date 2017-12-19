@@ -3,6 +3,7 @@
 <mapper namespace="Person">
 
     <resultMap id="personResultMap" type="com.my.test.service.person.model.Person">
+        <id column="id" jdbcType="BIGINT" property="id" />
         <result property="name" column="name"/>
         <result property="age" column="age"/>
         <result property="address" column="address"/>
@@ -37,6 +38,13 @@
         id,name,age,address
         FROM
         person
+    </select>
+
+    <select id="personDetail" parameterType="java.lang.String" resultMap="personResultMap">
+        SELECT
+        id,name,age,address
+        FROM
+        person where id=#{id}
     </select>
 
 </mapper>

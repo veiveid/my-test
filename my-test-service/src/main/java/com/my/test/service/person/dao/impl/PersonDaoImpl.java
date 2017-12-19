@@ -25,4 +25,9 @@ public class PersonDaoImpl extends SqlSessionDaoSupport implements PersonDao {
         return getSqlSession().selectList("Person.findAllPerson");
     }
 
+    @Override
+    public Person personDetail(String id) {
+        return getSqlSession().selectOne("Person.personDetail",id);
+    }
+
 }

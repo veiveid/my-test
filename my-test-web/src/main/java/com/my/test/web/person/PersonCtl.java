@@ -81,6 +81,18 @@ public class PersonCtl {
         return res;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/personDetail.json")
+    public Person personDetail(@RequestParam String id){
+        Person p = null;
+        try {
+            p = personService.personDetail(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return p;
+    }
+
     @RequestMapping(value = "/showFlower")
     public String showFlower(){
         return "/person/showFlower";

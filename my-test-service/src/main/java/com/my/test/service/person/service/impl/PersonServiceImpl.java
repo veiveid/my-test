@@ -41,4 +41,9 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> findAllPerson() {
         return personDao.findAllPerson();
     }
+
+    @Override
+    public Person personDetail(String id) {
+        return personDao.personDetail(id);
+    }
 }
