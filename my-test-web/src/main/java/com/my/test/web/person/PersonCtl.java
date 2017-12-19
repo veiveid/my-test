@@ -5,6 +5,8 @@ import com.my.test.service.person.service.impl.PersonServiceImpl;
 import com.my.test.service.person.service.PersonService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,7 @@ import java.util.Map;
 @RequestMapping(value = "/person")
 public class PersonCtl {
 
-    private static final Log logger = LogFactory.getLog(PersonCtl.class);
+    private static final Logger logger = LogManager.getLogger(PersonCtl.class);
 
     @Autowired
     private PersonService personService;
@@ -41,6 +43,7 @@ public class PersonCtl {
         List<Person> list = null;
         try {
             list = personService.findAllPerson();
+            logger.info("2121");
         }catch (Exception e){
             e.printStackTrace();
             logger.debug(e.getMessage());
