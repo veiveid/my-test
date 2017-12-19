@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping(value = "/person")
 public class PersonCtl {
 
-    private static final Log logger = LogFactory.getLog(PersonServiceImpl.class);
+    private static final Log logger = LogFactory.getLog(PersonCtl.class);
 
     @Autowired
     private PersonService personService;
