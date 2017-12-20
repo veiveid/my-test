@@ -2,6 +2,7 @@ package com.my.test.web.interceptor;
 
 import com.my.test.service.person.service.PersonService;
 import com.my.test.web.person.PersonCtl;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 public class CountInterceptor implements HandlerInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger("com.my.test.web.interceptor");
 
+    private ThreadLocal<Long> reqTimeThL = new ThreadLocal<Long>();
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        reqTimeThL.set(System.currentTimeMillis());
         return true;
     }
 
@@ -29,6 +33,9 @@ public class CountInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        LOGGER.info("访问路径=====================>{}",httpServletRequest.getRequestURI());
+        Long start = reqTimeThL.get();
+        long end = System.currentTimeMillis();
+        long timeCons = end-start;
+        LOGGER.info("访问路径========>{} 耗时========>{}",httpServletRequest.getRequestURI(),timeCons+"ms");
     }
 }

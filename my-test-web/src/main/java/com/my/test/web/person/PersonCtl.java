@@ -36,7 +36,6 @@ public class PersonCtl {
     @ResponseBody
     @RequestMapping(value = "allPerson")
     public List<Person> findAllPerson(){
-        long start = System.currentTimeMillis();
         List<Person> list = null;
         try {
             list = personService.findAllPerson();
@@ -44,7 +43,6 @@ public class PersonCtl {
             e.printStackTrace();
             LOGGER.error("PersonCtl.findAllPerson查询失败...",e);
         }
-        LOGGER.info("总执行时间：{}{}",(System.currentTimeMillis() - start)+"ms ","PersonCtl.findAllPerson");
         return list;
     }
 
