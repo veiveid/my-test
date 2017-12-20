@@ -1,16 +1,12 @@
 package com.my.test.web.person;
 
 import com.my.test.service.person.model.Person;
-import com.my.test.service.person.service.impl.PersonServiceImpl;
 import com.my.test.service.person.service.PersonService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,7 +23,7 @@ import java.util.Map;
 @RequestMapping(value = "/person")
 public class PersonCtl {
 
-    private static final Logger logger = LogManager.getLogger(PersonCtl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonCtl.class);
 
     @Autowired
     private PersonService personService;
@@ -40,14 +36,15 @@ public class PersonCtl {
     @ResponseBody
     @RequestMapping(value = "allPerson")
     public List<Person> findAllPerson(){
+        long start = System.currentTimeMillis();
         List<Person> list = null;
         try {
             list = personService.findAllPerson();
-            logger.info("2121");
         }catch (Exception e){
             e.printStackTrace();
-            logger.debug(e.getMessage());
+            LOGGER.error("PersonCtl.findAllPerson查询失败...",e);
         }
+        LOGGER.info("总执行时间：{}{}",(System.currentTimeMillis() - start)+"ms ","PersonCtl.findAllPerson");
         return list;
     }
 
@@ -62,7 +59,7 @@ public class PersonCtl {
             personService.updatePersonByid(person);
         }catch (Exception e){
             e.printStackTrace();
-            logger.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
         }
     }
 
@@ -73,7 +70,7 @@ public class PersonCtl {
         try {
             String pName = request.getParameter("pName");
             pName = java.net.URLDecoder.decode(pName,"UTF-8");
-            if("胖狗子".equals(pName) || "伟".equals(pName)||"晶".equals(pName)|| "可爱".equals(pName)){
+            if("1".equals(pName) || "2".equals(pName)||"3".equals(pName)|| "4".equals(pName)){
                 res.put("res","01");
                 return res;
             }
