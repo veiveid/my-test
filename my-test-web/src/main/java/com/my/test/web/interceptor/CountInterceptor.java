@@ -18,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 public class CountInterceptor implements HandlerInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger("com.my.test.web.interceptor");
 
-    private ThreadLocal<Long> reqTimeThL = new ThreadLocal<Long>();
+    private static final ThreadLocal<Long> REQ_TIME_THL = new ThreadLocal<Long>();
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        reqTimeThL.set(System.currentTimeMillis());
+        REQ_TIME_THL.set(System.currentTimeMillis());
         return true;
     }
 
@@ -33,7 +33,7 @@ public class CountInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        Long start = reqTimeThL.get();
+        Long start = REQ_TIME_THL.get();
         long end = System.currentTimeMillis();
         long timeCons = end-start;
         LOGGER.info("访问路径========>{} 耗时========>{}",httpServletRequest.getRequestURI(),timeCons+"ms");
