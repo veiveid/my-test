@@ -55,9 +55,30 @@
 			</Policies>
 			<DefaultRolloverStrategy max="72" />
 		</RollingRandomAccessFile >
+
+		<!-- 单独统计日志 -->
+		<RollingRandomAccessFile name="counterLog" fileName="${LOG.PATH}/my-test-web-counterLog.log"
+								 filePattern="${LOG.PATH}/my-test-web-counterLog-%d{yyyy-MM-dd-HH}-%i.log">
+			<PatternLayout pattern="%sn %d{yy/MM/dd HH:mm:ss,SSS} %r [%-6p] [%t] %c{1.}.%M(%F:%L) - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+            <DefaultRolloverStrategy max="72" />
+		</RollingRandomAccessFile>
 	</Appenders>
 
 	<loggers>
+
+		<!-- count logger -->
+		<!-- 日志单独输出，单独输出到Businesslog文件当中，也在其它日志文件当中体现 -->
+		<!-- 在类里面采用这种声明方式：private static final Logger log = LoggerFactory.getLogger("com.my.test.web.interceptor"); -->
+		<logger name="com.my.test.web.interceptor" level="info" additivity="false">
+			<appender-ref ref="counterLog" />
+			<appender-ref ref="my-test-web-info" />
+			<appender-ref ref="console" />
+		</logger>
+
 		<!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
 		<logger name="org.springframework" level="INFO"></logger>
 		<logger name="org.mybatis" level="INFO"></logger>
