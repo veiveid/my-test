@@ -17,10 +17,11 @@
         <jdk.version>1.7</jdk.version>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <spring.version>3.2.9.RELEASE</spring.version>
-        <slf4j.version>1.6.4</slf4j.version>
+        <slf4j.version>1.7.21</slf4j.version>
         <guava.version>18.0</guava.version>
         <aspectj.version>1.6.11</aspectj.version>
         <etms.common.version>1.0.2</etms.common.version>
+        <log4j.version>2.5</log4j.version>
     </properties>
 
     <dependencies>
@@ -136,26 +137,6 @@
         </dependency>
         <!--mybatis end-->
 
-
-        <!-- self  log -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>log4j</artifactId>
-                    <groupId>log4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -195,17 +176,35 @@
             <version>3.7</version>
         </dependency>
 
-        <!--log4j2 start-->
+        <!-- log4j2 and slf4j -->
         <dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-            <version>3.2.0</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-1.2-api</artifactId>
-            <version>2.1</version>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-nosql</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <!--log4j2 end-->
 
