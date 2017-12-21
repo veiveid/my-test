@@ -95,4 +95,9 @@ public class PersonCtl {
     public String showFlower(){
         return "/person/showFlower";
     }
+
+    @RequestMapping(value = "/addPerson")
+    public String addPerson(){
+        return "/person/add-upd-person";
+    }
 }

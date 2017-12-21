@@ -49,7 +49,15 @@
         <property name="numberToolAttribute" value="numberTool"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="exposeSessionAttributes" value="true"/>
-        <property name="order" value="0"/>
+        <property name="order" value="1"/>
+    </bean>
+
+    <bean id="htmlviewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="com.my.test.web.view.HtmlResourceView"/>
+        <property name="order" value="0" />
+        <property name="prefix" value="/static/hm/"/>
+        <property name="suffix" value=".html" />
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
     </bean>
 
 </beans>
