@@ -2,6 +2,7 @@ package com.my.test.web.interceptor;
 
 import com.my.test.service.person.service.PersonService;
 import com.my.test.web.person.PersonCtl;
+import com.my.test.web.util.IpUtil;
 import org.omg.PortableInterceptor.INACTIVE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * Created by vivi on 2017/12/10.
@@ -23,6 +26,9 @@ public class CountInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         REQ_TIME_THL.set(System.currentTimeMillis());
+        //String ip = httpServletRequest.getRemoteAddr();
+        String ip = IpUtil.getIpAddr(httpServletRequest);
+        LOGGER.info("客户端ip：{}",ip);
         return true;
     }
 
@@ -36,6 +42,6 @@ public class CountInterceptor implements HandlerInterceptor {
         Long start = REQ_TIME_THL.get();
         long end = System.currentTimeMillis();
         long timeCons = end-start;
-        LOGGER.info("访问路径========>{} 耗时========>{}",httpServletRequest.getRequestURI(),timeCons+"ms");
+        LOGGER.info("访问路径：{} 耗时：{}",httpServletRequest.getRequestURI(),timeCons+"ms");
     }
 }
