@@ -27,7 +27,7 @@ public class CountInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         REQ_TIME_THL.set(System.currentTimeMillis());
         //String ip = httpServletRequest.getRemoteAddr();
-        String ip = IpUtil.getIpAddr(httpServletRequest);
+        String ip = IpUtil.getIpFromRequest(httpServletRequest);
         LOGGER.info("客户端ip：{}",ip);
         return true;
     }
